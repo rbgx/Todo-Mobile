@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace Todo
+namespace Todo.iOS
 {
 	public class Application
 	{

@@ -1,41 +1,35 @@
-﻿using System;
+﻿using Todo.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Todo
 {
 	public class App : Application
 	{
-		static TodoItemDatabase database;
+		static TodoItemDatabase _database;
 
 		public App()
 		{
-			Resources = new ResourceDictionary();
-			Resources.Add("primaryGreen", Color.FromHex("91CA47"));
-			Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
+		    Resources = new ResourceDictionary
+		    {
+		        {"primaryGreen", Color.FromHex("91CA47")},
+		        {"primaryDarkGreen", Color.FromHex("6FA22E")}
+		    };
 
-			var nav = new NavigationPage(new TodoListPage());
-			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
-			nav.BarTextColor = Color.White;
+		    var nav = new NavigationPage(new Views.TodoListPage())
+		    {
+		        BarBackgroundColor = (Color) Current.Resources["primaryGreen"],
+		        BarTextColor = Color.White
+		    };
 
-			MainPage = nav;
+		    MainPage = nav;
 		}
 
-		public static TodoItemDatabase Database
-		{
-			get
-			{
-				if (database == null)
-				{
-					database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("TodoSQLite.db3"));
-				}
-				return database;
-			}
-		}
+		public static TodoItemDatabase Database => _database ?? (_database =
+		                                               new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("TodoSQLite.db3")));
 
-		public int ResumeAtTodoId { get; set; }
+	    public int ResumeAtTodoId { get; set; }
 
 		protected override void OnStart()
 		{

@@ -1,48 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
+using Todo.Models;
 
-namespace Todo
+namespace Todo.Data
 {
 	public class TodoItemDatabase
 	{
-		readonly SQLiteAsyncConnection database;
+		readonly SQLiteAsyncConnection _database;
 
 		public TodoItemDatabase(string dbPath)
 		{
-			database = new SQLiteAsyncConnection(dbPath);
-			database.CreateTableAsync<TodoItem>().Wait();
+			_database = new SQLiteAsyncConnection(dbPath);
+			_database.CreateTableAsync<TodoItem>().Wait();
 		}
 
 		public Task<List<TodoItem>> GetItemsAsync()
 		{
-			return database.Table<TodoItem>().ToListAsync();
+			return _database.Table<TodoItem>().ToListAsync();
 		}
 
 		public Task<List<TodoItem>> GetItemsNotDoneAsync()
 		{
-			return database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+			return _database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
 		}
 
 		public Task<TodoItem> GetItemAsync(int id)
 		{
-			return database.Table<TodoItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
+			return _database.Table<TodoItem>().Where(i => i.Id == id).FirstOrDefaultAsync();
 		}
 
 		public Task<int> SaveItemAsync(TodoItem item)
 		{
-			if (item.ID != 0)
+			if (item.Id != 0)
 			{
-				return database.UpdateAsync(item);
+				return _database.UpdateAsync(item);
 			}
 			else {
-				return database.InsertAsync(item);
+				return _database.InsertAsync(item);
 			}
 		}
 
 		public Task<int> DeleteItemAsync(TodoItem item)
 		{
-			return database.DeleteAsync(item);
+			return _database.DeleteAsync(item);
 		}
 	}
 }

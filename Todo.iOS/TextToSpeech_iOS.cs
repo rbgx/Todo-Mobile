@@ -1,11 +1,11 @@
 using AVFoundation;
+using Todo.iOS;
 using Xamarin.Forms;
-using Todo;
 
-[assembly: Dependency(typeof(TextToSpeech_iOS))]
-namespace Todo
+[assembly: Dependency(typeof(TextToSpeechIOs))]
+namespace Todo.iOS
 {
-	public class TextToSpeech_iOS : ITextToSpeech
+	public class TextToSpeechIOs : ITextToSpeech
 	{
 		float volume = 0.5f;
 		float pitch = 1.0f;

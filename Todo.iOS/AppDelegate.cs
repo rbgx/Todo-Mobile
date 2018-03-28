@@ -1,9 +1,9 @@
-using UIKit;
 using Foundation;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-namespace Todo
+namespace Todo.iOS
 {
 	[Register("AppDelegate")]
 	public partial class AppDelegate : FormsApplicationDelegate

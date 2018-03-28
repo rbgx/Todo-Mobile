@@ -1,7 +1,8 @@
 ﻿using System;
+using Todo.Models;
 using Xamarin.Forms;
 
-namespace Todo
+namespace Todo.Views
 {
 	public partial class TodoItemPage : ContentPage
 	{

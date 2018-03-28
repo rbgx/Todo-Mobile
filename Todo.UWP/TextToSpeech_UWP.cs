@@ -5,15 +5,16 @@ using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(TextToSpeech_UWP))]
+[assembly: Dependency(typeof(TextToSpeechUwp))]
+
 namespace Todo.UWP
 {
-	public class TextToSpeech_UWP : ITextToSpeech
-	{
-		// http://msdn.microsoft.com/en-us/library/windowsphone/develop/jj207057(v=vs.105).aspx
-		public async void Speak(string text)
-		{
-			SpeechSynthesizer synth = new SpeechSynthesizer();
+    public class TextToSpeechUwp : ITextToSpeech
+    {
+        // http://msdn.microsoft.com/en-us/library/windowsphone/develop/jj207057(v=vs.105).aspx
+        public async void Speak(string text)
+        {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
 
             try
             {
@@ -23,9 +24,10 @@ namespace Todo.UWP
                 mediaElement.SetSource(stream, stream.ContentType);
                 mediaElement.Play();
             }
-            catch (Exception pe) {
+            catch (Exception pe)
+            {
                 Debug.WriteLine("couldn't play voice " + pe.Message);
             }
-		}
-	}
+        }
+    }
 }

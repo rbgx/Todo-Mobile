@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
+using Todo.Models;
 using Xamarin.Forms;
 
-namespace Todo
+namespace Todo.Views
 {
 	public partial class TodoListPage : ContentPage
 	{
@@ -22,7 +22,7 @@ namespace Todo
 
 		async void OnItemAdded(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new TodoItemPage
+			await Navigation.PushAsync(new Views.TodoItemPage
 			{
 				BindingContext = new TodoItem()
 			});
@@ -34,7 +34,7 @@ namespace Todo
             //Debug.WriteLine("setting ResumeAtTodoId = " + (e.SelectedItem as TodoItem).ID);
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new TodoItemPage
+                await Navigation.PushAsync(new Views.TodoItemPage
                 {
                     BindingContext = e.SelectedItem as TodoItem
                 });
